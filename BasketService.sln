@@ -5,14 +5,13 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasketService", "BasketService\BasketService.csproj", "{EF91B5E5-3A37-4ED4-AF0C-E74B663D3B04}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Çözüm Öğeleri", "Çözüm Öğeleri", "{4C89BC93-1AD5-45A3-95F1-D2A2CF142CEA}"
-	ProjectSection(SolutionItems) = preProject
-		docker-compose.yml = docker-compose.yml
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLayer", "DataLayer\DataLayer.csproj", "{07189C6A-5078-4444-A091-F6626303E22C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "DataLayer\DataLayer.csproj", "{07189C6A-5078-4444-A091-F6626303E22C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj", "{1964E27B-7B03-4DF0-8DD5-347CA426EE32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{1964E27B-7B03-4DF0-8DD5-347CA426EE32}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{CFB7E6B0-61C8-4485-9A3D-54DF5FF8B240}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{FF8D1F1F-F5F0-40D8-B76E-9648A81FDFB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +31,14 @@ Global
 		{1964E27B-7B03-4DF0-8DD5-347CA426EE32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1964E27B-7B03-4DF0-8DD5-347CA426EE32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1964E27B-7B03-4DF0-8DD5-347CA426EE32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFB7E6B0-61C8-4485-9A3D-54DF5FF8B240}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFB7E6B0-61C8-4485-9A3D-54DF5FF8B240}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFB7E6B0-61C8-4485-9A3D-54DF5FF8B240}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFB7E6B0-61C8-4485-9A3D-54DF5FF8B240}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF8D1F1F-F5F0-40D8-B76E-9648A81FDFB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF8D1F1F-F5F0-40D8-B76E-9648A81FDFB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF8D1F1F-F5F0-40D8-B76E-9648A81FDFB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF8D1F1F-F5F0-40D8-B76E-9648A81FDFB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

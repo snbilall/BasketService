@@ -16,19 +16,26 @@ services:
     ports:
       - 27017:27017
   basketservice:
-    image: basketservice
+    image: ${DOCKER_REGISTRY-}basketservice
     build:
-      context: ./BasketService
+      context: .
       dockerfile: BasketService/Dockerfile
     environment:
       - ASPNETCORE_URLS=http://+:49155
       - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionString="mongodb://test:test@basketdb:27017",
+      - DatabaseName="BasketDb",
     ports:
       - "49155:49155"
+    depends_on:
+      - basketdb
+    networks:
+      - db-net
+      - backend-net
 
 networks:
   db-net:
-    driver: bridge
+  backend-net:
 
 volumes:
   db_data:
