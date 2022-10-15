@@ -1,13 +1,37 @@
 version: '3.4'
 
 services:
+  basketdb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: test
+      MONGO_INITDB_ROOT_PASSWORD: test
+    volumes:
+      - 'db_data:/data/db'
+      - 'db_config:/data/configdb'
+    networks:
+      - db-net
+    ports:
+      - 27017:27017
   basketservice:
     image: basketservice
     build:
       context: ./BasketService
       dockerfile: BasketService/Dockerfile
     environment:
-         - ASPNETCORE_URLS=http://+:49155
-         - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:49155
+      - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "49155:49155"
+
+networks:
+  db-net:
+    driver: bridge
+
+volumes:
+  db_data:
+    driver: local
+  db_config:
+    driver: local
