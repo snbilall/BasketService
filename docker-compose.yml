@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  basketservice:
+    image: basketservice
+    build:
+      context: ./BasketService
+      dockerfile: BasketService/Dockerfile
+    environment:
+         - ASPNETCORE_URLS=http://+:49155
+         - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "49155:49155"
