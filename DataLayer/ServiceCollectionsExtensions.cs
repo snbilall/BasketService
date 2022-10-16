@@ -1,12 +1,7 @@
 ﻿using Core.Model;
-using DataLayer;
+using DataLayer.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataLayer
 {
@@ -14,12 +9,8 @@ namespace DataLayer
     {
         public static void AddDataLayers(this IServiceCollection services, IConfiguration configuration)
         {
-            services.Configure<MongoConnectionOptions>(options =>
-            {
-                options.ConnectionString = configuration.GetSection("ConnectionString").Value;
-                options.DatabaseName = configuration.GetSection("BasketDb").Value;
-            });
-            services.AddSingleton<MongoDbContext>();
+            services.AddSingleton<IMongoDbContext, MongoDbContext>();
+            services.AddScoped<IBasketRepository, BasketRepository>();
         }
     }
 }

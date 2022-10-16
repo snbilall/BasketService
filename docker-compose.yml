@@ -3,7 +3,7 @@ version: '3.4'
 services:
   basketdb:
     image: mongo:latest
-    container_name: mongodb
+    container_name: basketdb
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: test

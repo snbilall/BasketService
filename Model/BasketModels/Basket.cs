@@ -6,8 +6,8 @@ namespace Model.BasketModels
 {
     public class Basket : BaseEntity
     {
-        [BsonRepresentation(BsonType.ObjectId)]
-        public Guid UserId { get; set; }
+        [BsonRepresentation(BsonType.String)]
+        public string UserId { get; set; }
         public List<BasketItem>? BasketItems { get; set; }
     }
 }

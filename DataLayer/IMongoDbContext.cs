@@ -2,7 +2,7 @@
 
 namespace DataLayer
 {
-    internal interface IMongoDbContext
+    public interface IMongoDbContext
     {
         IMongoDatabase MongoDatabase { get; }
     }

@@ -1,4 +1,5 @@
 ﻿using Model.Base;
+using MongoDB.Bson;
 using System.Linq.Expressions;
 
 namespace DataLayer.RespositoryBase
@@ -8,9 +9,9 @@ namespace DataLayer.RespositoryBase
     {
         IQueryable<T> Query();
         Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes);
-        Task<T> GetByIdAsync(Guid id);
+        Task<T> GetByIdAsync(ObjectId id);
         Task AddAsync(T entity);
-        Task<T> DeleteAsync(T entity);
+        Task<T> DeleteAsync(ObjectId id);
         Task<T> UpdateAsync(T entity);
     }
 }

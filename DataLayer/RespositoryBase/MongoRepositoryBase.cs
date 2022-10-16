@@ -1,24 +1,18 @@
 ﻿using Model.Base;
+using MongoDB.Bson;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using System.Transactions;
 
 namespace DataLayer.RespositoryBase
 {
-    internal abstract class MongoRepositoryBase<TContext, T> : IRepositoryBase<T>
+    public class MongoRepositoryBase<TContext, T> : IRepositoryBase<T>
         where TContext : IMongoDbContext
         where T : BaseEntity
     {
-        private TContext context { get; set; }
         private IMongoCollection<T> Collection { get; }
 
         public MongoRepositoryBase(TContext context)
         {
-            this.context = context;
             Collection = context.MongoDatabase.GetCollection<T>(typeof(T).Name);
         }
 
@@ -32,24 +26,27 @@ namespace DataLayer.RespositoryBase
             return Collection.Find(predicate).FirstOrDefaultAsync();
         }
 
-        public Task<T> GetByIdAsync(Guid id)
+        public Task<T> GetByIdAsync(ObjectId id)
         {
             return Collection.Find(x => x.Id == id).FirstOrDefaultAsync();
         }
 
         public Task AddAsync(T entity)
         {
-            var options = new InsertOneOptions { BypassDocumentValidation = false };
+            entity.CreatedAt = DateTime.Now;
+            entity.UpdatedAt = DateTime.Now;
+            var options = new InsertOneOptions { BypassDocumentValidation = true };
             return Collection.InsertOneAsync(entity, options);
         }
 
-        public Task<T> DeleteAsync(T entity)
+        public Task<T> DeleteAsync(ObjectId id)
         {
-            return Collection.FindOneAndDeleteAsync(x => x.Id == entity.Id);
+            return Collection.FindOneAndDeleteAsync(x => x.Id == id);
         }
 
         public Task<T> UpdateAsync(T entity)
         {
+            entity.UpdatedAt = DateTime.Now;
             return Collection.FindOneAndReplaceAsync(x => x.Id == entity.Id, entity);
         }
 
