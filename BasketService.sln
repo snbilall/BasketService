@@ -13,9 +13,14 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{FF8D1F1F-F5F0-40D8-B76E-9648A81FDFB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "..\Business\Business.csproj", "{93180E45-3595-42A8-AC68-D59198655348}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business", "..\Business\Business.csproj", "{93180E45-3595-42A8-AC68-D59198655348}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business.Model", "..\Business.Model\Business.Model.csproj", "{793AA946-BD1C-4909-A787-70F49128B6EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business.Model", "..\Business.Model\Business.Model.csproj", "{793AA946-BD1C-4909-A787-70F49128B6EB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker-entrypoint-initdb.d", "docker-entrypoint-initdb.d", "{4989ED80-C7B3-46B8-A9F9-060D0C5D9603}"
+	ProjectSection(SolutionItems) = preProject
+		mongo-init.js = mongo-init.js
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

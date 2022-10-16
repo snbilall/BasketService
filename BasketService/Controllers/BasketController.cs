@@ -5,10 +5,10 @@ using MongoDB.Bson;
 
 namespace BasketService.Controllers
 {
-    [ApiController]
+    
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1.0")]
-    public class BasketController : ControllerBase
+    public class BasketController : BaseController
     {
 
         private readonly ILogger<BasketController> _logger;
@@ -30,7 +30,7 @@ namespace BasketService.Controllers
         }
 
         [HttpPost(Name = "Basket")]
-        public async Task<IActionResult> Get([FromBody] BasketRequestDto requestDto)
+        public async Task<IActionResult> Create([FromBody] BasketRequestDto requestDto)
         {
             var basket = await _basketProvider.AddAsync(requestDto);
             return Ok(basket);
