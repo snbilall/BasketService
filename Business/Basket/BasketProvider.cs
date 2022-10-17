@@ -1,20 +1,25 @@
 ﻿using Business.Model.BasketModels;
 using DataLayer.Repositories;
+using Integration.ProductServices;
 using MongoDB.Bson;
 
 namespace Business.Basket
 {
     public class BasketProvider : IBasketProvider
     {
-        private IBasketRepository _basketRepository;
+        private readonly IBasketRepository _basketRepository;
+        private readonly IProductService _productService;
 
-        public BasketProvider(IBasketRepository basketRepository)
+        public BasketProvider(IBasketRepository basketRepository,
+            IProductService productService)
         {
             _basketRepository = basketRepository;
+            _productService = productService;
         }
 
         public async Task<BasketResponseDto> AddAsync(BasketRequestDto requestDto)
         {
+            await _productService.CreateDummyProductsAsync();
             var basket = requestDto.ConvertToBasket();
             await _basketRepository.AddAsync(basket);
             return new BasketResponseDto().ConvertFromBasket(basket);

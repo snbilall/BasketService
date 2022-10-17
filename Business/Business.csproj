@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -10,7 +10,8 @@
     <ProjectReference Include="..\Business.Model\Business.Model.csproj" />
     <ProjectReference Include="..\Core\Core.csproj" />
     <ProjectReference Include="..\DataLayer\DataLayer.csproj" />
+    <ProjectReference Include="..\Integration.Model\Integration.Model.csproj" />
+    <ProjectReference Include="..\Integration\Integration.csproj" />
     <ProjectReference Include="..\Model\Model.csproj" />
   </ItemGroup>
-
 </Project>

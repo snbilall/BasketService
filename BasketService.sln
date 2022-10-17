@@ -13,9 +13,15 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{FF8D1F1F-F5F0-40D8-B76E-9648A81FDFB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Business\Business.csproj", "{7836FB67-A22A-4B3C-8555-817B2F63292B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business", "Business\Business.csproj", "{7836FB67-A22A-4B3C-8555-817B2F63292B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business.Model", "Business.Model\Business.Model.csproj", "{53D4B37B-FE98-432D-8937-8A71241BE0E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business.Model", "Business.Model\Business.Model.csproj", "{53D4B37B-FE98-432D-8937-8A71241BE0E4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{5C8EE0E2-2B89-496F-82D9-2015B53C0F74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integration", "Integration\Integration.csproj", "{759F3181-4368-4A4C-948A-65C63DDA7AF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integration.Model", "Integration.Model\Integration.Model.csproj", "{9B60A199-B884-4583-B8BD-7F7333FE8CFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,9 +57,21 @@ Global
 		{53D4B37B-FE98-432D-8937-8A71241BE0E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53D4B37B-FE98-432D-8937-8A71241BE0E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53D4B37B-FE98-432D-8937-8A71241BE0E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{759F3181-4368-4A4C-948A-65C63DDA7AF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{759F3181-4368-4A4C-948A-65C63DDA7AF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{759F3181-4368-4A4C-948A-65C63DDA7AF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{759F3181-4368-4A4C-948A-65C63DDA7AF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B60A199-B884-4583-B8BD-7F7333FE8CFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B60A199-B884-4583-B8BD-7F7333FE8CFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B60A199-B884-4583-B8BD-7F7333FE8CFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B60A199-B884-4583-B8BD-7F7333FE8CFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{759F3181-4368-4A4C-948A-65C63DDA7AF2} = {5C8EE0E2-2B89-496F-82D9-2015B53C0F74}
+		{9B60A199-B884-4583-B8BD-7F7333FE8CFC} = {5C8EE0E2-2B89-496F-82D9-2015B53C0F74}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {05344643-F1B0-4305-A7CE-A71E79052D62}
