@@ -35,5 +35,13 @@ namespace BasketService.Controllers
             var basket = await _basketProvider.AddAsync(requestDto);
             return Ok(basket);
         }
+
+        [HttpDelete(Name = "Basket/{id}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var objId = ObjectId.Parse(id);
+            var basket = await _basketProvider.DeleteAsync(objId);
+            return Ok(basket);
+        }
     }
 }

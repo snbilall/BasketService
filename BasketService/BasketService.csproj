@@ -16,10 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Business.Model\Business.Model.csproj" />
-    <ProjectReference Include="..\..\Business\Business.csproj" />
+    <ProjectReference Include="..\Business.Model\Business.Model.csproj" />
+    <ProjectReference Include="..\Business\Business.csproj" />
     <ProjectReference Include="..\Core\Core.csproj" />
-    <ProjectReference Include="..\DataLayer\DataLayer.csproj" />
     <ProjectReference Include="..\Model\Model.csproj" />
   </ItemGroup>
 
