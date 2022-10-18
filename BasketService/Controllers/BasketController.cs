@@ -1,4 +1,4 @@
-using Business.Basket;
+using Business.BasketProviders;
 using Business.Model.BasketModels;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
@@ -29,18 +29,17 @@ namespace BasketService.Controllers
             return Ok(basket);
         }
 
-        [HttpPost(Name = "Basket")]
+        [HttpPost(Name = "AddProduct")]
         public async Task<IActionResult> Create([FromBody] BasketRequestDto requestDto)
         {
-            var basket = await _basketProvider.AddAsync(requestDto);
+            var basket = await _basketProvider.AddProductAsync(requestDto);
             return Ok(basket);
         }
 
-        [HttpDelete(Name = "Basket/{id}")]
-        public async Task<IActionResult> Delete(string id)
+        [HttpDelete(Name = "RemoveProduct")]
+        public async Task<IActionResult> Delete([FromBody] BasketRequestDto requestDto)
         {
-            var objId = ObjectId.Parse(id);
-            var basket = await _basketProvider.DeleteAsync(objId);
+            var basket = await _basketProvider.RemoveProductAsync(requestDto);
             return Ok(basket);
         }
     }

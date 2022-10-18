@@ -8,6 +8,6 @@ namespace Model.BasketModels
     {
         [BsonRepresentation(BsonType.String)]
         public string UserId { get; set; }
-        public List<BasketItem>? BasketItems { get; set; }
+        public List<BasketItem> BasketItems { get; set; } = new List<BasketItem>();
     }
 }

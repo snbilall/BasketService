@@ -11,7 +11,7 @@ namespace Integration.ElasticSearch
         private readonly ElasticClient _client;
         public ElasticService(IOptions<ElasticConnectionOptions> options)
         {
-            string host = "http://localhost";
+            string host = "http://host.docker.internal";
             string port = "9200";
             var settings = new ConnectionSettings(new Uri(host + ":" + port));
             settings.EnableApiVersioningHeader();
@@ -22,7 +22,7 @@ namespace Integration.ElasticSearch
         public async Task CheckIndex<T>()
             where T : BaseIntegrationModel
         {
-            var indexName = typeof(T).Name;
+            var indexName = typeof(T).Name.ToLower();
             var any = await _client.Indices.ExistsAsync(indexName);
             if (any.Exists)
                 return;
@@ -40,14 +40,14 @@ namespace Integration.ElasticSearch
         public async Task InsertBulkDocuments<T>(List<T> entities)
             where T : BaseIntegrationModel
         {
-            var indexName = typeof(T).Name;
+            var indexName = typeof(T).Name.ToLower();
             await _client.IndexManyAsync(entities, index: indexName);
         }
 
         public async Task InsertDocument<T>(T entity)
             where T : BaseIntegrationModel
         {
-            var indexName = typeof(T).Name;
+            var indexName = typeof(T).Name.ToLower();
             var response = await _client.CreateAsync(entity, q => q.Index(indexName));
             if (response.ApiCall?.HttpStatusCode == 409)
             {
@@ -58,7 +58,7 @@ namespace Integration.ElasticSearch
         public async Task<List<T>> GetDocuments<T>(Func<QueryContainerDescriptor<T>, QueryContainer> query)
             where T : BaseIntegrationModel
         {
-            var indexName = typeof(T).Name;
+            var indexName = typeof(T).Name.ToLower();
             var response = await _client.SearchAsync<T>(s => s.Index(indexName)
                                                               .Query(query));
             return response.Documents.ToList();
@@ -67,7 +67,7 @@ namespace Integration.ElasticSearch
         public async Task<T> GetDocument<T>(string id)
             where T : BaseIntegrationModel
         {
-            var indexName = typeof(T).Name;
+            var indexName = typeof(T).Name.ToLower();
             var response = await _client.GetAsync<T>(id, q => q.Index(indexName));
             return response.Source;
         }

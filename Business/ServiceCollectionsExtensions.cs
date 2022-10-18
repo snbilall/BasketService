@@ -1,4 +1,4 @@
-﻿using Business.Basket;
+﻿using Business.BasketProviders;
 using Integration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

@@ -1,16 +1,23 @@
 ﻿namespace Core.Exceptions
 {
-    internal class BusinessBaseException : Exception
+    public class BusinessBaseException : Exception
     {
-        public int exceptionKey { get; set; }
+        public int ExceptionKey { get; set; }
+        public int StatusCode { get; set; }
         public BusinessBaseException(int exceptionKey, string message) : base(message)
         {
-            this.exceptionKey = exceptionKey;
+            this.ExceptionKey = exceptionKey;
+        }
+
+        public BusinessBaseException(int exceptionKey, string message, int statusCode) : base(message)
+        {
+            this.ExceptionKey = exceptionKey;
+            this.StatusCode = statusCode;
         }
 
         public BusinessBaseException(string message) : base(message)
         {
-            this.exceptionKey = BusinessBaseExceptionKeys.UnhandledBusinessException;
+            this.ExceptionKey = BusinessBaseExceptionKeys.UnhandledBusinessException;
         }
     }
 }

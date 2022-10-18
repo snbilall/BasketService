@@ -19,9 +19,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business.Model", "Business.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{5C8EE0E2-2B89-496F-82D9-2015B53C0F74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integration", "Integration\Integration.csproj", "{759F3181-4368-4A4C-948A-65C63DDA7AF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Integration", "Integration\Integration.csproj", "{759F3181-4368-4A4C-948A-65C63DDA7AF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integration.Model", "Integration.Model\Integration.Model.csproj", "{9B60A199-B884-4583-B8BD-7F7333FE8CFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Integration.Model", "Integration.Model\Integration.Model.csproj", "{9B60A199-B884-4583-B8BD-7F7333FE8CFC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DC402E38-8424-427A-B271-F6942773698D}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
