@@ -1,6 +1,8 @@
+using BasketService.Middlewares;
 using Business;
 using Core.Model;
 using DataLayer;
+using Integration.ProductServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,11 +31,25 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    using (var scope = app.Services.CreateScope())
+    {
+        var productService = scope.ServiceProvider.GetService<IProductService>();
+        if (productService != null)
+            await productService.CreateDummyProductsAsync();
+    }
 }
 
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors(x => x
+        .AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader());
+
+// global error handler
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.MapControllers();
 

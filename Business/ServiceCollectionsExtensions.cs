@@ -1,4 +1,5 @@
 ﻿using Business.BasketProviders;
+using Business.Localization;
 using Integration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +12,7 @@ namespace Business
         {
             services.AddIntegrationServices(configuration);
             services.AddScoped<IBasketProvider, BasketProvider>();
+            services.AddSingleton<ILocalizationProvider, LocalizationProvider>();
         }
     }
 }
