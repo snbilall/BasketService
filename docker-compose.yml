@@ -26,7 +26,7 @@ services:
       - ConnectionString="mongodb://test:test@basketdb:27017",
       - DatabaseName="BasketDb",
     ports:
-      - "49155:49155"
+      - "49155:443"
     depends_on:
       - basketdb
       - elasticsearch
