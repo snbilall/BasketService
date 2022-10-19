@@ -5,6 +5,5 @@ namespace Business.Model.BasketModels
     public class BasketRequestDto : BasketItemDto
     {
         public Guid UserId { get; set; }
-        public string? BasketId { get; set; }
     }
 }

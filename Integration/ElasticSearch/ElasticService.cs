@@ -19,7 +19,7 @@ namespace Integration.ElasticSearch
             _client = new ElasticClient(settings);
         }
 
-        public async Task CheckIndex<T>()
+        public async Task CheckIndex<T>(Func<CreateIndexDescriptor, CreateIndexDescriptor> func)
             where T : BaseIntegrationModel
         {
             var indexName = typeof(T).Name.ToLower();
@@ -27,12 +27,16 @@ namespace Integration.ElasticSearch
             if (any.Exists)
                 return;
 
+            var func1 = func;
             var response = await _client.Indices.CreateAsync(indexName,
-                ci => ci
+                ci =>
+                {
+                    ci
                     .Index(indexName)
-                    .Settings(s => s.NumberOfShards(3).NumberOfReplicas(1))
-                    .ProductMap()
-                    );
+                    .Settings(s => s.NumberOfShards(3).NumberOfReplicas(1));
+                    ci = func(ci);
+                    return ci;
+                });
 
             return;
         }

@@ -7,12 +7,14 @@ namespace Business.Model.BasketModels
     {
         public string BasketId { get; set; }
         public Guid UserId { get; set; }
+        public decimal TotalPayment { get; set; }
         public List<BasketItemResponseDto>? BasketItems { get; set; }
 
         public BasketResponseDto ConvertFromBasket(Basket basket)
         {
             BasketId = basket.Id.ToString();
             UserId = Guid.Parse(basket.UserId);
+            TotalPayment = basket.TotalPayment;
             if (basket.BasketItems != null)
             {
                 BasketItems = basket.BasketItems.ConvertAll(x => new BasketItemResponseDto

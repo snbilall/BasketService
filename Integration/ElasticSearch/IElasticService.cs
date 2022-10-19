@@ -5,7 +5,7 @@ namespace Integration.ElasticSearch
 {
     public interface IElasticService
     {
-        Task CheckIndex<T>()
+        Task CheckIndex<T>(Func<CreateIndexDescriptor, CreateIndexDescriptor> func)
             where T : BaseIntegrationModel;
         Task InsertDocument<T>(T entity)
             where T : BaseIntegrationModel;

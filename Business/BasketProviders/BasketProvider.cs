@@ -1,9 +1,9 @@
 ﻿using Business.Model.BasketModels;
 using Core.Exceptions;
 using DataLayer.Repositories;
+using Elasticsearch.Net;
 using Integration.ProductServices;
 using Model.BasketModels;
-using MongoDB.Bson;
 
 namespace Business.BasketProviders
 {
@@ -19,23 +19,24 @@ namespace Business.BasketProviders
             _productService = productService;
         }
 
-        public async Task<BasketResponseDto> GetAsync(ObjectId basketId)
+        public async Task<BasketResponseDto> GetOrCreateAsync(Guid userId)
         {
-            var basket = await _basketRepository.GetByIdAsync(basketId);
+            Basket basket = await GetBasketAsync(userId);
+            if (string.IsNullOrWhiteSpace(basket.UserId))
+            {
+                basket.UserId = userId.ToString();
+                await _basketRepository.AddAsync(basket);
+            }
+            basket.CalculatePayment();
             return new BasketResponseDto().ConvertFromBasket(basket);
         }
 
         public async Task<BasketResponseDto> AddProductAsync(BasketRequestDto requestDto)
         {
-            //await _productService.CreateDummyProductsAsync();
-
-            Basket basket = await GetBasketAsync(requestDto.BasketId);
+            Basket basket = await GetBasketAsync(requestDto.UserId);
 
             var product = await _productService.GetProductByIdAsync(requestDto.ProductId);
-            if (product == null)
-            {
-                throw new ProductException(BusinessBaseExceptionKeys.ProductNotFoundException, "Ürün bulunamadı");
-            }
+            if (product == null) throw new ProductException(BusinessBaseExceptionKeys.ProductNotFoundException, "Ürün bulunamadı");
 
             var basketProduct = basket.BasketItems.FirstOrDefault(x => x.ProductId == product.Id.ToString());
             if (basketProduct == null)
@@ -50,60 +51,50 @@ namespace Business.BasketProviders
             }
             else
             {
-                if (product.Stock < basketProduct.Quantity + requestDto.Quantity) throw new ProductStockNotSufficientException();
-                basketProduct.Quantity += basketProduct.Quantity;
+                var newQuantity = basketProduct.Quantity + requestDto.Quantity;
+                if (product.Stock < newQuantity) throw new ProductStockNotSufficientException();
+                basketProduct.Quantity = newQuantity;
             }
 
-    
+
+            basket.CalculatePayment();
             if (string.IsNullOrWhiteSpace(basket.UserId))
             {
                 basket.UserId = requestDto.UserId.ToString();
                 await _basketRepository.AddAsync(basket);
             }
             else
-            {
-                await _basketRepository.UpdateAsync(basket);
-            }
+                _ = await _basketRepository.UpdateAsync(basket);
             
             return new BasketResponseDto().ConvertFromBasket(basket);
         }
 
         public async Task<BasketResponseDto> RemoveProductAsync(BasketRequestDto requestDto)
         {
-            Basket basket = await GetBasketAsync(requestDto.BasketId);
+            Basket basket = await GetBasketAsync(requestDto.UserId);
+
+            if (string.IsNullOrWhiteSpace(basket.UserId)) throw new BasketNotFoundException();
+
             var basketProduct = basket.BasketItems.FirstOrDefault(x => x.ProductId == requestDto.ProductId.ToString());
-            
             if (basketProduct == null) throw new BasketItemNotFoundException();
 
             if (basketProduct.Quantity < requestDto.Quantity)
-            {
                 throw new BasketException(BusinessBaseExceptionKeys.BasketItemQuantityCouldNotBeLessException, "Düşülecek Ürün sayısı daha az olamaz");
-            }
-            else if (basketProduct.Quantity < requestDto.Quantity)
-            {
+            else if (basketProduct.Quantity == requestDto.Quantity)
                 basket.BasketItems.Remove(basketProduct);
-            }
             else
-            {
                 basketProduct.Quantity -= requestDto.Quantity;
-            }
-            
+
+            basket.CalculatePayment();
             await _basketRepository.UpdateAsync(basket);
             return new BasketResponseDto().ConvertFromBasket(basket);
         }
 
-        private async Task<Basket> GetBasketAsync(string basketId)
+        private async Task<Basket> GetBasketAsync(Guid userId)
         {
-            if (string.IsNullOrWhiteSpace(basketId))
-            {
-                return new Basket();
-            }
-            else
-            {
-                var basket = await _basketRepository.GetByIdAsync(ObjectId.Parse(basketId));
-                if (basket == null) throw new BasketNotFoundException();
-                return basket;
-            }
+            var basket = await _basketRepository.FirstOrDefaultAsync(x => x.UserId == userId.ToString());
+            basket ??= new Basket();
+            return basket;
         }
     }
 }

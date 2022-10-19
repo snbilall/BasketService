@@ -1,3 +1,4 @@
+using BasketService.Controllers;
 using BasketService.Middlewares;
 using Business;
 using Core.Model;
@@ -23,6 +24,7 @@ builder.Services.Configure<MongoConnectionOptions>(configurationRoot.GetSection(
 builder.Services.AddDataLayers(builder.Configuration);
 builder.Services.AddBusinessServices(builder.Configuration);
 builder.Services.AddApiVersioning();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 var app = builder.Build();
 
@@ -33,9 +35,17 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
     using (var scope = app.Services.CreateScope())
     {
-        var productService = scope.ServiceProvider.GetService<IProductService>();
-        if (productService != null)
-            await productService.CreateDummyProductsAsync();
+        try
+        {
+            var productService = scope.ServiceProvider.GetService<IProductService>();
+            if (productService != null)
+                await productService.CreateDummyProductsAsync();
+        }
+        catch (Exception ex) 
+        {
+            var logger = scope.ServiceProvider.GetService<ILogger<Program>>();
+            logger.LogError(new EventId(100), "Ürünler oluþturulurken sorun oluþtu", ex);
+        }
     }
 }
 

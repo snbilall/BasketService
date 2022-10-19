@@ -55,7 +55,7 @@ namespace BasketService.Middlewares
                 {
                     response.StatusCode = (int)HttpStatusCode.InternalServerError;
                     var message = _localizationProvider.GetLocalization(_unhandledExceptionExceptionKey, "tr");
-                    _logger.LogError("Sistem hatası", error);
+                    _logger.LogError(error, "Sistem hatası");
                     var resp = JsonSerializer.Serialize(new { message = message });
                     await response.WriteAsync(resp);
                 }

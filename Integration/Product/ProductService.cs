@@ -1,5 +1,6 @@
 ﻿using Integration.ElasticSearch;
 using Integration.Model.ProductModels;
+using Nest;
 
 namespace Integration.ProductServices
 {
@@ -14,7 +15,7 @@ namespace Integration.ProductServices
 
         public async Task CreateDummyProductsAsync()
         {
-            await _elasticService.CheckIndex<Product>();
+            await _elasticService.CheckIndex<Product>(ProductMapping.ProductMap);
 
             List<Guid> productIds = new List<Guid> { 
                 Guid.Parse("be667845-3f43-42bc-9b10-6e37a9650fc3"),
