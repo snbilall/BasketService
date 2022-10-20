@@ -1,6 +1,5 @@
 ﻿using Core.Model;
 using Integration.Model.ElasticModels;
-using Integration.ProductServices;
 using Microsoft.Extensions.Options;
 using Nest;
 

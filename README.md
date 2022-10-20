@@ -12,7 +12,7 @@ To install all of the template files use visual studio, docker desktop app. Insi
 docker-compose up -d
 ```
 
-The command above will download images. It could get a logn time and you will have to have about 2 GB disk space.
+The command above will download images. It could get a logn time and you will have to have about 5 GB disk space.
 
 ----
 

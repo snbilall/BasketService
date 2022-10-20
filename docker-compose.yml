@@ -23,8 +23,8 @@ services:
     environment:
       - ASPNETCORE_URLS=http://+:49155
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionString="mongodb://test:test@basketdb:27017",
-      - DatabaseName="BasketDb",
+      - ConnectionString=mongodb://test:test@basketdb:27017
+      - DatabaseName=BasketDb
       - ElasticHost=http://host.docker.internal
       - ElasticPort=9200
     ports:

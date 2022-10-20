@@ -1,4 +1,3 @@
-using BasketService.Controllers;
 using BasketService.Middlewares;
 using Business;
 using Core.Model;
@@ -19,8 +18,6 @@ var configurationRoot = new ConfigurationBuilder()
     .AddEnvironmentVariables()
     .Build();
 
-var cs = configurationRoot.GetSection("MongoDbConnection").Get<MongoConnectionOptions>();
-builder.Services.Configure<MongoConnectionOptions>(configurationRoot.GetSection("MongoDbConnection"));
 builder.Services.AddDataLayers(builder.Configuration);
 builder.Services.AddBusinessServices(builder.Configuration);
 builder.Services.AddApiVersioning();
