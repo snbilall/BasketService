@@ -11,8 +11,8 @@ namespace Integration.ElasticSearch
         private readonly ElasticClient _client;
         public ElasticService(IOptions<ElasticConnectionOptions> options)
         {
-            string host = "http://host.docker.internal";
-            string port = "9200";
+            string host = options.Value.Host;
+            string port = options.Value.Port;
             var settings = new ConnectionSettings(new Uri(host + ":" + port));
             settings.EnableApiVersioningHeader();
 

@@ -25,6 +25,8 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionString="mongodb://test:test@basketdb:27017",
       - DatabaseName="BasketDb",
+      - ElasticHost=http://host.docker.internal
+      - ElasticPort=9200
     ports:
       - "49155:443"
     depends_on:

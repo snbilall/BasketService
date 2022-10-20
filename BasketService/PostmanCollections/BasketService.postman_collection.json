@@ -1,0 +1,134 @@
+{
+	"info": {
+		"_postman_id": "c0ae2420-3c3d-43ac-8771-fb4ef38c0f1f",
+		"name": "BasketService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5016434"
+	},
+	"item": [
+		{
+			"name": "getBasket",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Your test name\", function () {\r",
+							"    if (pm.response.to.have.status(200)) {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.collectionVariables.set(\"basketId\", jsonData.basketId);\r",
+							"    }\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiUrl}}basket/{{userId}}",
+					"host": [
+						"{{apiUrl}}basket"
+					],
+					"path": [
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addProduct",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"UserId\": \"{{userId}}\",\r\n    \"ProductId\": \"{{productId}}\",\r\n    \"Quantity\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{apiUrl}}basket/addproduct",
+					"host": [
+						"{{apiUrl}}basket"
+					],
+					"path": [
+						"addproduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "removeProduct",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ProductId\": \"{{productId}}\",\r\n    \"UserId\": \"{{userId}}\",\r\n    \"Quantity\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{apiUrl}}basket/removeproduct",
+					"host": [
+						"{{apiUrl}}basket"
+					],
+					"path": [
+						"removeproduct"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "userId",
+			"value": "83cddbc5-fe05-4c94-b306-d2cf7f7e4cf9"
+		},
+		{
+			"key": "productId",
+			"value": "be667845-3f43-42bc-9b10-6e37a9650fc3"
+		},
+		{
+			"key": "basketId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "apiUrl",
+			"value": "https://localhost:49155/api/v1/"
+		}
+	]
+}
