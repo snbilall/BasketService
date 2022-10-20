@@ -34,7 +34,7 @@ Integration tests will be written in the future. You could test it in two ways:
 
 Inside BasketService/PostmanCollections directory you can import the file postman and start testing!
 
-When you start Docker Compose in visual studio, it will open a swagger ui browser page, you can try it out with api version 1.
+Set docker-compose project start Docker Compose in visual studio, it will open a swagger ui browser page, you can try it out with api version 1.
 
 The user id is expected to be guid.
 Available product id Guids are:
