@@ -16,9 +16,9 @@ The command above will download images. It could get a logn time and you will ha
 
 ----
 
-# Key Value Go Service
+# Basket Service
 
-**Description**:  A Basic key value project. Gets key value values from client, saves data on memory. It saves memory data to a file in periodic interval. Gin library used to build web service.
+**Description**:  A Basic project that get, add or remove products to user's basket. Products and their stocks are stored in elasticsearh. Elastic search database updates are expected from another microservice
 
 ## Dependencies
 
@@ -32,9 +32,17 @@ No configuration needed
 
 Integration tests will be written in the future. You could test it in two ways:
 
-Inside postman collections directory you can import the file postman and start testing!
+Inside BasketService/PostmanCollections directory you can import the file postman and start testing!
 
 When you start Docker Compose in visual studio, it will open a swagger ui browser page, you can try it out with api version 1.
+
+The user id is expected to be guid.
+Available product id Guids are:
+
+```
+be667845-3f43-42bc-9b10-6e37a9650fc3
+d20b5364-4270-4a6f-9cfe-546313140d51
+```
 
 ## Getting help
 
